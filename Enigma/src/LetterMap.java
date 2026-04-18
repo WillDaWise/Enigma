@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 public class LetterMap {
     private int len;
     private int[] forwardsMapping;
@@ -45,14 +43,15 @@ public class LetterMap {
     public int increaseOffset() {
         return this.increaseOffset(1);
     }
-    public int increaseOffset(int amount) {
+    private int increaseOffset(int amount) {
         offset = (offset + amount) % len;
         return offset;
     }
 
     public int getVal(int index) {
-        return forwardsMapping[index % len];
+        return forwardsMapping[(index + offset) % len];
     }
+    
     public int getInverse(int val) {
         for (int i = 0; i < len; i++) {
             if (forwardsMapping[i] == val) {

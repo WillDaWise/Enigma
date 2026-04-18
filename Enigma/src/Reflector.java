@@ -12,7 +12,7 @@ public class Reflector extends LetterCode {
     
 
 
-    public boolean rotate() {
+    public boolean rotate(boolean increaseNotchOffset) {
         return false;
     }
     public int convert(int in) {

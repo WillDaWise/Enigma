@@ -9,5 +9,9 @@ public class Test {
         someMap.increaseOffset();
         someMap.increaseOffset();
         System.out.println(someMap.toString());
+        System.out.println(someMap.getInverse(0));
+        System.out.println(someMap.getInverse(1));
+        System.out.println(someMap.getInverse(2));
+        System.out.println(someMap.getInverse(3));
     }
 }
