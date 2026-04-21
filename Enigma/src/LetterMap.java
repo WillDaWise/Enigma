@@ -41,10 +41,10 @@ public class LetterMap {
         return output;
     }
     public int increaseOffset() {
-        return this.increaseOffset(1);
+        return this.increaseOffset(-1);
     }
     private int increaseOffset(int amount) {
-        offset = (offset + amount) % len;
+        this.offset = (offset + amount + len) % len;
         return offset;
     }
 
@@ -53,6 +53,7 @@ public class LetterMap {
     }
     
     public int getInverse(int val) {
+        System.out.println(this.toString());
         for (int i = 0; i < len; i++) {
             if (forwardsMapping[i] == val) {
                 return (i - offset + len) % len;
