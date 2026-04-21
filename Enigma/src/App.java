@@ -9,23 +9,11 @@ public class App {
         //String input = "YRUHQSLDPXNGOKMIEBFZCWVJAT";
         //System.out.println(input);
         //System.out.println(Arrays.toString(toValues(input)));
-        Cog enigmaOne = createDefault();
-        System.out.println(encryptDecrypt("a", enigmaOne));
+        Cog enigmaOne = createDoubleStep();
+        System.out.println(encryptDecrypt("qwertyuiopasdfghjklzxcvbnm", enigmaOne));
         
         
-        /*Reflector reflector = new Reflector();
-        Cog iCog = new Cog(reflector);
-        System.out.println(iCog.rotate(true));
-        System.out.println(iCog.convert(0));
-        System.out.println(iCog.rotate(true));
-        System.out.println(iCog.convert(0));
-        System.out.println(iCog.rotate(true));
-        System.out.println(iCog.convert(0));
-        System.out.println(iCog.rotate(true));
-        System.out.println(iCog.convert(0));
-        System.out.println(iCog.rotate(true));
-        System.out.println(iCog.convert(0));
-        */
+       
     }
 
     public static String encryptDecrypt(String input, Cog machine) {
@@ -38,12 +26,21 @@ public class App {
         return toCharacters(outputValues);
     }
 
+    public static Cog createDoubleStep() {
+        Reflector r = new Reflector();
+        // note, these notchvalues are a guess - MUST FIGURE OUT HOW THESE WORK!!!
+        Cog iiiCog = createCog("BDFHJLCPRTXVZNYEIWGAKMUSQO", r, 20, toValue('V'), "III");
+        Cog iiCog = createCog("AJDKSIRUXBLHWTMCQGZNPYFVOE", iiiCog, 3, toValue('E'), "II");
+        Cog iCog = createCog("EKMFLGDQVZNTOWYHXUSPAIBRCJ", iiCog, 14, toValue('Q'), "I");
+        return iCog;
+    }
+
     public static Cog createDefault() {
         Reflector r = new Reflector();
         // note, these notchvalues are a guess - MUST FIGURE OUT HOW THESE WORK!!!
-        Cog iiiCog = createCog("BDFHJLCPRTXVZNYEIWGAKMUSQO", r, 0, toValue('F'), "III");
-        Cog iiCog = createCog("AJDKSIRUXBLHWTMCQGZNPYFVOE", iiiCog, 0, toValue('F'), "II");
-        Cog iCog = createCog("EKMFLGDQVZNTOWYHXUSPAIBRCJ", iiCog, 25, toValue('F'), "I");
+        Cog iiiCog = createCog("BDFHJLCPRTXVZNYEIWGAKMUSQO", r, 0, toValue('V'), "III");
+        Cog iiCog = createCog("AJDKSIRUXBLHWTMCQGZNPYFVOE", iiiCog, 0, toValue('E'), "II");
+        Cog iCog = createCog("EKMFLGDQVZNTOWYHXUSPAIBRCJ", iiCog, 0, toValue('Q'), "I");
         return iCog;
     }
 

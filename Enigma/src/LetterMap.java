@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class LetterMap {
     private int len;
     private int[] forwardsMapping;
@@ -18,9 +20,11 @@ public class LetterMap {
         this.offset = offset % len;
     }
     public String toString() {
-        String output = "Forward mapping: [";
+        String output = "Note, currently wrong, add offset to vals. Array Stored: " + Arrays.toString(this.forwardsMapping);
+        output += "\nOffset: " + offset;
+        output += "\nForward mapping: [";
         for (int i = 0; i < len; i++) {
-            output+=forwardsMapping[(i+offset)%len];
+            output+=getVal(i);
             if (i < len - 1) {
                 output+= ", ";
             }
@@ -28,7 +32,7 @@ public class LetterMap {
         output += "]\n";
         int[] reverse = new int[len];
         for (int i = 0; i < len; i++) {
-            reverse[(forwardsMapping[(i + offset) % len])] =  i; 
+            reverse[getVal(i)] =  i; 
         }
         output += "Reverse mapping: [";
         for (int i = 0; i < len; i++) {
@@ -41,25 +45,38 @@ public class LetterMap {
         return output;
     }
     public int increaseOffset() {
-        return this.increaseOffset(-1);
+        return this.increaseOffset(1);
     }
     private int increaseOffset(int amount) {
-        this.offset = (offset + amount + len) % len;
+        this.offset = modLen(offset + amount);
         return offset;
     }
 
+    private int modLen(int val) {
+        return (val + len) % len;
+    }
+
     public int getVal(int index) {
-        return forwardsMapping[(index + offset) % len];
+        return modLen(forwardsMapping[(index + offset) % len] - offset);
     }
     
     public int getInverse(int val) {
-        System.out.println(this.toString());
+        // System.out.println(this.toString());
         for (int i = 0; i < len; i++) {
-            if (forwardsMapping[i] == val) {
-                return (i - offset + len) % len;
-                // possibly (i - offset) % len
+            if (getVal(i) == val) {
+                return i;
             }
         }
+        
+        
+        
+        /* 
+        for (int i = 0; i < len; i++) {
+            if (forwardsMapping[i] == val) {
+                return (i + offset) % len;
+                // possibly (i - offset) % len
+            }
+        }*/
         return -1;
     }
 }

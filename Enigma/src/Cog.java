@@ -1,9 +1,12 @@
+import java.util.Arrays;
+
 public class Cog extends LetterCode {
 
     private LetterCode next;
     private boolean[] notches;
     private int notchOffset;
-    private String name; 
+    private String name;
+    private int len; 
 
     public Cog(LetterCode next) {
         this(new int[] {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,
@@ -19,6 +22,7 @@ public class Cog extends LetterCode {
         this.notchOffset = startPos;
         this.next = next;
         this.notches = notches.clone();
+        this.len = notches.length;
         this.notches[notchPos] = true;
     }
 
@@ -31,28 +35,27 @@ public class Cog extends LetterCode {
     }
 
     boolean rotate(boolean notchEngaged) {
-        boolean nextRotated = next.rotate(notches[notchOffset]);
+        boolean nextRotated = next.rotate(this.notches[notchOffset]);
         if (notchEngaged || nextRotated) {
-            notchOffset = (notchOffset - 1 + notches.length) % notches.length;
+            notchOffset = (notchOffset + 1 + len) % len;
             map.increaseOffset();
-            System.out.println("notch offset increased at cog " + name + ", now: " + (notchOffset));
-            System.out.println();
+            System.out.println("notch offset increased at cog " + name + ", now: " + (len + notchOffset) % len);
+            // System.out.println(Arrays.toString(notches));
             return true;
         }
         return false;
     }
 
     int convert(int in) {
-        System.out.println(this.toString());
-        System.out.println("At cog " + name);
-        System.out.println("number in: " + in);
-        System.out.println("number out: " + this.map.getVal(in));
+        // System.out.println(this.toString());
+        // System.out.println("At cog " + name);
+        // System.out.println("number in: " + in);
+        // System.out.println("number out: " + this.map.getVal(in));
 
         int nextResult = next.convert(this.map.getVal(in));
-        System.out.println("returning through Cog " + name);
-        System.out.println("num in: " + nextResult);
-        System.out.println("numout: " + this.map.getInverse(nextResult));
-        //System.out.println(this.map.toString());
+        // System.out.println("returning through Cog " + name);
+        // System.out.println("num in: " + nextResult);
+        // System.out.println("numout: " + this.map.getInverse(nextResult));
         return this.map.getInverse(nextResult);
     }
     
