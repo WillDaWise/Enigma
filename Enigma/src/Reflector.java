@@ -17,7 +17,7 @@ public class Reflector extends LetterCode {
         return false;
     }
     public int convert(int in) {
-        System.out.println("at reflector, " + in + "in, " + this.map.getVal(in) + " out.");
+        System.out.println("At reflector, " + in + " in, " + this.map.getVal(in) + " out.");
         return map.getVal(in);
     }
 }

@@ -39,7 +39,8 @@ public class Cog extends LetterCode {
         if (notchEngaged || nextRotated) {
             notchOffset = (notchOffset + 1 + len) % len;
             map.increaseOffset();
-            System.out.println("notch offset increased at cog " + name + ", now: " + (len + notchOffset) % len);
+            System.out.println("Notch offset increased at cog " + name + ", now: " + (len + notchOffset) % len);
+            System.out.println("New mapping of inputs: " + this.map.toString());
             // System.out.println(Arrays.toString(notches));
             return true;
         }
@@ -48,14 +49,16 @@ public class Cog extends LetterCode {
 
     int convert(int in) {
         // System.out.println(this.toString());
-        // System.out.println("At cog " + name);
-        // System.out.println("number in: " + in);
-        // System.out.println("number out: " + this.map.getVal(in));
+        System.out.println("At Cog " + name);
+        System.out.println("Number in: " + in);
+        System.out.println("Number out: " + this.map.getVal(in));
+        System.out.println();
 
         int nextResult = next.convert(this.map.getVal(in));
-        // System.out.println("returning through Cog " + name);
-        // System.out.println("num in: " + nextResult);
-        // System.out.println("numout: " + this.map.getInverse(nextResult));
+        System.out.println("Returning through Cog " + name);
+        System.out.println("Number in: " + nextResult);
+        System.out.println("Number out: " + this.map.getInverse(nextResult));
+        System.out.println();
         return this.map.getInverse(nextResult);
     }
     

@@ -20,8 +20,7 @@ public class LetterMap {
         this.offset = offset % len;
     }
     public String toString() {
-        String output = "Note, currently wrong, add offset to vals. Array Stored: " + Arrays.toString(this.forwardsMapping);
-        output += "\nOffset: " + offset;
+        String output= "Offset: " + offset;
         output += "\nForward mapping: [";
         for (int i = 0; i < len; i++) {
             output+=getVal(i);
