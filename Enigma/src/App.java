@@ -23,8 +23,12 @@ public class App {
         //System.out.println(Arrays.toString(toValues(input)));
         Cog enigmaOne = createDoubleStep();
         String keyboard = "qwertyuiopasdfghjklzxcvbnm";
-        System.out.println(encryptDecrypt("aaaaaaa", enigmaOne));
-        
+        System.out.println(encryptDecrypt("Hello", enigmaOne));
+        System.out.println("Enter text to encrypt/decrypt: ");
+        Scanner s = new Scanner(System.in);
+        String input = s.nextLine();
+        Cog enigmaI = createDefault();
+        System.out.println("Input: " + input + " ==> Output: " + encryptDecrypt(input, enigmaI));
         
        
     }

@@ -67,15 +67,6 @@ public class LetterMap {
             }
         }
         
-        
-        
-        /* 
-        for (int i = 0; i < len; i++) {
-            if (forwardsMapping[i] == val) {
-                return (i + offset) % len;
-                // possibly (i - offset) % len
-            }
-        }*/
         return -1;
     }
 }
